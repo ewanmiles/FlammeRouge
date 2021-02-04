@@ -100,7 +100,6 @@ u = Pieces("u",[track_2,track_2,finish,finish,finish,finish])
 
 class Racecourse:
     def __init__(self,name,piece_array,weather):
-
         weather = np.array(weather) #Make np array for easy matrix manipulation
         self.name = name
         self.route = []
@@ -131,6 +130,10 @@ class Racecourse:
                 self.route[ind-1] = start_2_noslip
             ind += 1
 
+        self.position_array = []
+        for i in self.route:
+            self.position_array.append(i.width*[0])
+
     def attributes(self):
         """
         Returns attributes of each tile of the stage as full list in format
@@ -148,6 +151,7 @@ class Racecourse:
 
 #An example stage build and how its attributes are returned
 #stage_18 = Racecourse("stage_18",[a,black_2,h,white_4,L,o,p,c,white_5,black_6,r,white_3,g,q,J,k,s,t,e,I,U],[["black_2","wet"],["black_6","crosswind"]])
+#stage_18.position_array
 #stage_18.attributes()
 
 

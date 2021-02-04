@@ -1,32 +1,33 @@
 import random
-rouleur_deck=[3,3,3,4,4,4,5,5,5,6,6,6,7,7,7],sprinteur_deck=[2,2,2,3,3,3,4,4,4,5,5,5,5,9,9,9],,peleton_deck=[[3],[3],[3],[4],[4],[4],[5],[5],[5],[6],[6],[6],[7],[7],[7],[2,9],[2,9]]
 
+rouleur_deck=[3,3,3,4,4,4,5,5,5,6,6,6,7,7,7]
+sprinteur_deck=[2,2,2,3,3,3,4,4,4,5,5,5,5,9,9,9]
 
+peleton_deck=[[3],[3],[3],[4],[4],[4],[5],[5],[5],[6],[6],[6],[7],[7],[7],[2,9],[2,9]]
 
+face_up_rouleur=[]
+face_up_sprinteur=[]
+face_up_peleton=[]
+used_cards_rouleur=[]
+used_cards_sprinteur=[]
+used_cards_peleton=[]
 
-face_up_rouleur=[],face_up_sprinteur=[],face_up_peleton=[],used_cards_rouleur=[],used_cards_sprinteur=[],used_cards_peleton=[]
-
-
-
-
-
-
-def rouleur():
-    if len(rouleur_deck)==0 and len(face_up_rouleur)==0:
-        to_return=[2,rouleur_deck,face_up_rouleur]
+def rouleur(start, fu, uc):
+    if len(start)==0 and len(fu)==0:
+        to_return=[2,start,fu]
     else:
-        if len(rouleur_deck)==0:
-            for i in range(len(face_up_rouleur)):
-                rouleur_deck.append(face_up_rouleur[i])
+        if len(start)==0:
+            for i in range(len(fu)):
+                start.append(fu[i])
             
-            energy_deck=rouleur_deck
+            energy_deck=start
             
-            for i in range(len(face_up_rouleur)):
-                face_up_rouleur.pop(0)
-            face_up=face_up_rouleur
+            for i in range(len(fu)):
+                fu.pop(0)
+            face_up=fu
         else:
-            energy_deck=rouleur_deck
-            face_up=face_up_rouleur
+            energy_deck=start
+            face_up=fu
 
         picked_up=card_picker(energy_deck)
         for i in range(len(picked_up)):
@@ -38,10 +39,11 @@ def rouleur():
         for i in range(len(picked_up)):
 
             face_up.append(picked_up[i])
-        used_cards_rouleur.append(chosen_card)
+        uc.append(chosen_card)
         to_return=[chosen_card,energy_deck,face_up]
 
     return to_return
+
 def sprinteur():
     if len(sprinteur_deck)==0 and len(face_up_sprinteur)==0:
         to_return=[2,sprinteur_deck,face_up_sprinteur]
@@ -73,6 +75,7 @@ def sprinteur():
         to_return=[chosen_card,energy_deck,face_up]
 
     return to_return
+
 def peleton():
     if len(peleton_deck)==0 and len(face_up_peleton)==0:
         to_return=[[2],peleton_deck,face_up_peleton]
@@ -117,5 +120,3 @@ def card_picker(energy_deck):
 
 def card_choice(hand):
     return hand[0]
-
-
